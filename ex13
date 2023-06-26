@@ -1,0 +1,33 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	number := 12345
+
+	sum, err := sumDigits(number)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos dígitos:", sum)
+	}
+}
+
+func sumDigits(number int) (int, error) {
+	if number < 0 {
+		return 0, errors.New("o número é negativo")
+	}
+
+	str := strconv.Itoa(number)
+	sum := 0
+	for _, digit := range str {
+		digitInt, _ := strconv.Atoi(string(digit))
+		sum += digitInt
+	}
+
+	return sum, nil
+}

@@ -1,0 +1,36 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func main() {
+	strings := []string{"Hello", "world", "Go", "Programming"}
+
+	result, err := getUppercaseStrings(strings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings iniciadas com letra maiúscula:", result)
+	}
+}
+
+func getUppercaseStrings(strings []string) (string, error) {
+	if len(strings) == 0 {
+		return "", errors.New("o slice está vazio")
+	}
+
+	var result strings.Builder
+	for _, str := range strings {
+		firstChar := rune(str[0])
+		if unicode.IsUpper(firstChar) {
+			result.WriteString(str)
+			result.WriteString(" ")
+		}
+	}
+
+	return strings.TrimRight(result.String(), " "), nil
+}

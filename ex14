@@ -1,0 +1,39 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	slice1 := []int{1, 2, 3, 4, 5}
+	slice2 := []int{4, 5, 6, 7, 8}
+
+	intersection, err := intersectSlices(slice1, slice2)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Interseção:", intersection)
+	}
+}
+
+func intersectSlices(slice1 []int, slice2 []int) ([]int, error) {
+	if len(slice1) == 0 || len(slice2) == 0 {
+		return nil, errors.New("um dos slices está vazio")
+	}
+
+	intersection := make([]int, 0)
+	lookup := make(map[int]bool)
+
+	for _, num := range slice1 {
+		lookup[num] = true
+	}
+
+	for _, num := range slice2 {
+		if lookup[num] {
+			intersection = append(intersection, num)
+		}
+	}
+
+	return intersection, nil
+}

@@ -1,0 +1,32 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	number := 3
+
+	isPresent, err := isNumberInSlice(number, slice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Está presente:", isPresent)
+	}
+}
+
+func isNumberInSlice(number int, slice []int) (bool, error) {
+	if len(slice) == 0 {
+		return false, errors.New("o slice está vazio")
+	}
+
+	for _, num := range slice {
+		if num == number {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}

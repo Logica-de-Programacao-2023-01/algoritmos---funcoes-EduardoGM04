@@ -1,0 +1,27 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func main() {
+	text := "Olá, como vai você?"
+
+	words, err := getWords(text)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Palavras:", words)
+	}
+}
+
+func getWords(text string) ([]string, error) {
+	if len(text) == 0 {
+		return nil, errors.New("a string está vazia")
+	}
+
+	words := strings.Split(text, " ")
+	return words, nil
+}
